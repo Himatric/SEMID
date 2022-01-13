@@ -12,7 +12,7 @@ class Console:
         import sys
         sys.stdout.flush()
         if os.name == "nt":
-            return ctypes.windll.kernel32.SetConsoleTitleA(title.encode())
+            return ctypes.windll.kernel32.SetConsoleTitleA(title)
         else:
             return print("\x1b]0;"+title.encode(), end="\a")
     def center(text:str) -> str:
