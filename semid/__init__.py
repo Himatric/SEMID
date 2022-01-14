@@ -3,7 +3,7 @@ from semid.app.argapp import SemidArgs
 from colorama import init
 import sys
 init()
-if len(sys.argv) < 1:
+if len(sys.argv) < 2:
     __app__ = Semid()
 else:
     __app__ = SemidArgs()
