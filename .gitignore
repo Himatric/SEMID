@@ -2,3 +2,9 @@ __pycache__/
 yes.json
 res.html
 test.py
+Databases/
+api.js
+package.json
+package-lock.json
+node_modules/
+.go
