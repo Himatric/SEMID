@@ -16,6 +16,7 @@ class Semid:
         self.handle(what)
     def handle(self, what:str):
         function = what.split(" ")[0]
+        # self.check_function(function)
         if function == "use":
             try:
                 module = what.split(" ")[1]
@@ -29,14 +30,18 @@ class Semid:
                 try:
                     Modules.get_module_by_name(module, function)(args)
                     return self.start()
-                except Exception or TypeError or ValueError:
-                    print(Modules.get_function_syntax(module, function))
-                    return self.start()
+                except Exception or TypeError or ValueError or KeyError:
+                    try:
+                        print(Modules.get_function_syntax(module, function))
+                        return self.start()
+                    except:
+                        self.wrong_module()
+                        self.start()
             except IndexError:
                 try:
                     Modules.get_module_by_name(module, function)()
                     return self.start()
-                except Exception or TypeError or ValueError:
+                except Exception or TypeError or ValueError or KeyError:
                     try:
                         print(Modules.get_function_syntax(module, function))
                     except:
@@ -79,7 +84,11 @@ Try typing help to see what you can do.
 """
         print(Console.color(text))
     def wrong_module(self):
-        text = """ERR: Invalid command"""
+        text = """ERR: Invalid module"""
         return print(Console.red(Console.center(text)))
+    def check_function(self, functio:str):
+        found = False
+        functions = ["search", "searchusername", "searchip", "tokeninfo", "tokenonliner", "search"]
+        
     
         

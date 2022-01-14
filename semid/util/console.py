@@ -1,4 +1,4 @@
-import ctypes, textwrap
+import ctypes, textwrap, os
 class Console:
     @staticmethod
     def color(text) -> str:
@@ -11,7 +11,10 @@ class Console:
     def set_title(title:str) -> bool:
         import sys
         sys.stdout.flush()
-        return ctypes.windll.kernel32.SetConsoleTitleA(title.encode())
+        if os.name == "nt":
+            return ctypes.windll.kernel32.SetConsoleTitleA(title.encode())
+        else:
+            return print("\x1b]0;"+title.encode(), end="\a")
     def center(text:str) -> str:
         lines = textwrap.wrap(text)
         return "\n".join(line.center(100) for line in lines)

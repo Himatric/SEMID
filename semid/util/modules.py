@@ -10,7 +10,6 @@ class Modules:
             funct = getattr(sys.modules[name.lower()], func.lower())
             return funct
         except:
-            print("Invalid Module/Function name.")
             raise Exception()
     def get_function_syntax(module:str, function:str) -> str:
         function = function + "syntax"
