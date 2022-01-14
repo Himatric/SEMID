@@ -80,6 +80,7 @@ def search(args):
         cookies = req.cookies
         response = scraper.post(url, cookies=cookies, data=data, headers=header.generate())
         soup2 = bs(response.text, 'html.parser')
+        
         try:
             if (
                 soup2.find('div', attrs={'class': 'is-errored'}).text
@@ -113,3 +114,11 @@ def search(args):
 {c} Phone: {phone}
 """
     print(text)
+
+
+def searchsyntax():
+    text = """
+--username | -u <username>
+
+Example: use twitter::search -u twitter"""
+    return text

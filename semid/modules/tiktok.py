@@ -39,11 +39,18 @@ def search(args:str):
     for z in alldata["ItemModule"]:
         video = alldata["ItemModule"][z]
         stringdata += video["desc"] +";"
+        stickers = video["stickersOnItem"]
+        for sticker in stickers:
+            stringdata += sticker["stickerText"][0]
     for z in alldata["UserModule"]["stats"]:
         stats = alldata["UserModule"]["stats"][z]
         nickname = alldata["UserModule"]["users"][z]["nickname"]
+        bio = alldata["UserModule"]["users"][z]["signature"]
+        link = alldata["UserModule"]["users"][z]["bioLink"]["link"]
     c = Console.red("|")
     text = f"""{c} Username: {username} , Nickname: {nickname}
+{c} Bio:       {bio}
+{c} Linked:    {link}
 {c} Followers: {stats["followerCount"]}
 {c} Following: {stats["followingCount"]}
 {c} Likes:     {stats["heart"]}
