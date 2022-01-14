@@ -14,7 +14,7 @@ class Console:
         if os.name == "nt":
             return ctypes.windll.kernel32.SetConsoleTitleA(title.encode())
         else:
-            return print("\x1b]0;"+title.encode(), end="\a")
+            return print("\x1b]0;"+title, end="\a")
     def center(text:str) -> str:
         lines = textwrap.wrap(text)
         return "\n".join(line.center(100) for line in lines)
