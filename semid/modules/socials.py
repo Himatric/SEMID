@@ -7,6 +7,7 @@ from semid.util.console import Console
 def search(what):
     parser = argparse.ArgumentParser("SEMID")
     parser.add_argument("--username","-u", required=False)
+    what = what.split()
     args = parser.parse_args(what)
     try:
         username = args.username

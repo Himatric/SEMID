@@ -46,6 +46,10 @@ python -m semid
                                                     and through all their videos for information
                                                     such as discord tag, email and phone number.
 
+        socials         search                      Searches for a users social media by the
+                                                    username provided. Currently only looks
+                                                    for linktree, but will be updated shortly
+
         playstation     searchusername              Sends a request to PS Resolver's api
                                                     which returns an IP Address if found
 
