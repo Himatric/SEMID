@@ -39,6 +39,9 @@ class Modules:
 
         doxbin          search                      Searches provided username on doxbin and
                                                     returns the urls if found.
+
+        twitter         search                      Scrapes twitter forgot password page and
+                                                    returns twitter account + email/phone if found
         """
         print(Console.color(text))
 

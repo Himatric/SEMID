@@ -27,6 +27,10 @@ python -m semid
     use                     Module::Function    Function Arguments  Use a built in function
 
     modules                 /                   /                   Lists all availabe modules
+    
+    cls                     /                   /                   Clears the console.
+
+    help                    /                   /                   Shows this menu.
 
 ```
 
@@ -57,10 +61,15 @@ python -m semid
 
         doxbin          search                      Searches provided username on doxbin and
                                                     returns the urls if found.
+                                                    
+        twitter         search                      Scrapes twitter forgot password page and
+                                                    returns twitter account + email/phone if found.
 
 ```
 
-## todo ##
+## Needed ##
+
+DM me if you have any leaks with discord ids.
 
 
 ## Notes ##

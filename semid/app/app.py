@@ -5,14 +5,15 @@ class Semid:
     def __init__(self) -> None:
         self.response = "\n\033[96m=>  \033[0m"
         self.version = 1.0
+        self.show_banner()
         if os.name == "nt":
             os.system("cls")
         else: 
             os.system("clear")
         Console.set_title("""SEMID Framework | Made by Hima""")
-        self.show_banner()
         self.config = json.loads(open("config.json").read())
     def start(self):
+        
         sys.stdout.write(self.response)
         sys.stdout.flush()
         what = input()
@@ -79,9 +80,13 @@ Try typing help to see what you can do.
                                     SEMID HELP MENU
     CommandName             Args                Kwargs              Description
 
-    use                     Module::Function    Function Arguments  Use a built in function
+    use                     Module::Function    Function Arguments  Use a built in module.
 
-    modules                 /                   /                   Lists all availabe modules
+    modules                 /                   /                   Lists all availabe modules.
+
+    cls                     /                   /                   Clears the console.
+
+    help                    /                   /                   Shows this menu.
 
 
 """

@@ -85,13 +85,13 @@ def search(args):
                 soup2.find('div', attrs={'class': 'is-errored'}).text
                 == 'Please try again later.'
             ):
-                return f'{Fore.YELLOW}•{Fore.RESET} Rate Limit'
+                print( f'{Fore.YELLOW}•{Fore.RESET} Rate Limit' )
         except:
-            pass
+            print("Error")
         try:
             info = soup2.find('ul', attrs={'class': 'Form-radioList'}).findAll('strong')
         except:
-            return 'No email or phone'
+            print( 'No email or phone')
         try:
             phone = int(info[0].text)
             email = str(info[1].text)
