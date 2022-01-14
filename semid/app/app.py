@@ -5,11 +5,11 @@ class Semid:
     def __init__(self) -> None:
         self.response = "\n\033[96m=>  \033[0m"
         self.version = 1.0
-        self.show_banner()
         if os.name == "nt":
             os.system("cls")
         else: 
             os.system("clear")
+        self.show_banner()
         Console.set_title("""SEMID Framework | Made by Hima""")
         self.config = json.loads(open("config.json").read())
     def start(self):
