@@ -22,5 +22,18 @@
         "name": "tiktok",
         "type":"status",
         "status": 404
+    },
+    {
+        "url": "https://euw.op.gg/summoner/userName={name}",
+        "name": "euw.op.gg",
+        "type": "message",
+        "status": 200,
+        "msg": "SummonerNotFoundLayout"
+    },
+    {
+        "url": "https://fortnitetracker.com/profile/all/{name}",
+        "name": "fortnitetracker",
+        "type": "status",
+        "status": 404
     }
 ]

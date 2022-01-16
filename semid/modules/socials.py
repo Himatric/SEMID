@@ -3,7 +3,7 @@ import requests, json, argparse
 import semid
 from semid.util.console import Console
 from semid.util.search import Google, WeLeak
-
+from fake_headers import Headers
 
 def search(what):
     parser = argparse.ArgumentParser("SEMID")
@@ -23,16 +23,16 @@ def search(what):
         socials = json.loads(soup.find("script", {"id": "__NEXT_DATA__"}).contents[0])["props"]["pageProps"]["account"]["socialLinks"]
         for s in socials:
             print(Console.color("Found: " + s["url"]))
-    socials = json.loads(open("C:\SEMID\semid/socials.json", "r").read())
+    socials = json.loads(open("./semid/socials.json", "r").read())
     for social in socials:
-        res = requests.get(social["url"].replace("{name}", username))
+        headers = Headers("chrome").generate()
+        res = requests.get(social["url"].replace("{name}", username), headers=headers)
         open("res.html", "w", encoding="utf-8").write(res.text)
         if social["type"] == "status" and res.status_code != social["status"]:
             print(Console.color("Found: " +social["url"].replace("{name}", username)))
-        elif social["type"] == "error":
+        elif social["type"] == "message":
             msg = social["msg"]
             if msg not in res.text:
-                open("res.html", "w", encoding="utf-8").write(res.text)
                 print(Console.color("Found: " + social["url"].replace("{name}", username)))
     for url, title in Google.search(f'site:youtube.com "{username}"', 0):
         if "/channel/" in url and username.lower() in title.lower():
