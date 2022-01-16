@@ -16,5 +16,11 @@
         "name": "github",
         "type": "status",
         "status": 404
+    },
+    {
+        "url": "https://tiktok.com/@{name}",
+        "name": "tiktok",
+        "type":"status",
+        "status": 404
     }
 ]

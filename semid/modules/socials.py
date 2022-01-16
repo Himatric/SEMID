@@ -1,12 +1,14 @@
 from bs4 import BeautifulSoup as bs
 import requests, json, argparse
+import semid
 from semid.util.console import Console
-from semid.util.search import Google
+from semid.util.search import Google, WeLeak
 
 
 def search(what):
     parser = argparse.ArgumentParser("SEMID")
     parser.add_argument("--username","-u", required=False)
+    parser.add_argument("--weleak", "-w", action="store_true", required=False)
     what = what.split()
     args = parser.parse_args(what)
     try:
@@ -40,6 +42,8 @@ def search(what):
     for url, title in Google.search(f'site:twitter.com "{username}"', 0):
         if url.endswith(username.lower()):
             print(Console.color("Found: " + url))
+    if args.weleak == True and semid.__app__.config["WeLeakInfo"] != "" and len(username) > 4:
+        print(Console.color(WeLeak.search(username)))
 
 
 def searchsyntax():

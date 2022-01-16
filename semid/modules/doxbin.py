@@ -1,17 +1,16 @@
 from semid.util.search import Google
 from semid.util.console import Console
-
+import argparse
 
 def search(args:str):
-    argsArr = args.split(" ")
+    parser = argparse.ArgumentParser("SEMID")
+    parser.add_argument("--username", "-u", required=False)
+    args = args.split()
+    args = parser.parse_args(args)
     try:
-        uind = argsArr.index("--username")
+        username = args.username
     except:
-        try:
-            uind = argsArr.index("-u")
-        except:
-            raise TypeError
-    username = argsArr[uind + 1]
+        raise TypeError
     search = Google.search(f'site:doxbin.com "{username}"', 0)
     if len(search) < 1:
         print("No search results")

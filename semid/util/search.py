@@ -4,18 +4,17 @@ import semid
 
 class Google:
     @staticmethod
-    def search(what, i:int) -> list:
+    def search(what:str, i:int) -> list:
         i += 1
         if i > 10: return [(None, None)]
         """ DuckDuckGo search """
         def req(what):
             res = requests.post("https://lite.duckduckgo.com/lite/", headers={
                     "accept": "*/*",
-                    "origin": "https://lite.duckduckgo.com",
+                    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
                     "referer": "https://lite.duckduckgo.com/",
-                    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"
-                },
-                data={
+                    "origin": "https://lite.duckduckgo.com"
+                }, data={
                     "q": what,
                     "dt": None,
                     "kl": None
@@ -24,15 +23,12 @@ class Google:
 
         res = req(what)
         if res.status_code == 403:
-            req("dog pics")
+            req("kitten meme")
             return Google.search(what, i)
 
         soup = bs4.BeautifulSoup(res.text, "html.parser")
 
-        return [
-            (x["href"], x.text)
-            for x in soup.find_all("a", {"rel": "nofollow"})
-        ]
+        return [(found["href"], found.text) for found in soup.find_all("a", {"rel": "nofollow"})]
 class Regex:
     @staticmethod
     def search(stringdata:str) -> str:
