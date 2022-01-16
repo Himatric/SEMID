@@ -51,7 +51,8 @@ python -m semid
                                                     for linktree, but will be updated shortly
         
         semid           search                      Sends a request to our api, which includes an
-                                                    ip address if found.
+                                                    ip address if found. Currently only working
+                                                    with discord ID
 
         playstation     searchusername              Sends a request to PS Resolver's api
                                                     which returns an IP Address if found
@@ -65,6 +66,9 @@ python -m semid
         discord         tokenonliner                Makes all the tokens from a provided file
                                                     online by connecting them directly to
                                                     Discord's websocket.
+
+        discord         scrapechannel               Scrapes messages from a discord channel
+                                                    and outputs them in a file/console
 
         doxbin          search                      Searches provided username on doxbin and
                                                     returns the urls if found.
