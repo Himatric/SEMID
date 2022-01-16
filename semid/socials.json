@@ -1,0 +1,20 @@
+[
+    {
+        "url": "https://myanimelist.net/profile/{name}",
+        "name": "instagram",
+        "type": "status",
+        "status": 404
+    },
+    {
+        "url": "https://myspace.com/{name}",
+        "name": "myspace",
+        "type": "status",
+        "status": 404
+    },
+    {
+        "url": "https://github.com/{name}",
+        "name": "github",
+        "type": "status",
+        "status": 404
+    }
+]

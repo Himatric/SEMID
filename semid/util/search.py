@@ -4,7 +4,9 @@ import semid
 
 class Google:
     @staticmethod
-    def search(what) -> list:
+    def search(what, i:int) -> list:
+        i += 1
+        if i > 10: return [(None, None)]
         """ DuckDuckGo search """
         def req(what):
             res = requests.post("https://lite.duckduckgo.com/lite/", headers={
@@ -22,8 +24,8 @@ class Google:
 
         res = req(what)
         if res.status_code == 403:
-            req("funny meme")
-            return Google.search(what)
+            req("dog pics")
+            return Google.search(what, i)
 
         soup = bs4.BeautifulSoup(res.text, "html.parser")
 

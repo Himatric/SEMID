@@ -31,5 +31,6 @@ def searchsyntax():
     text = """
 --id | -q <discord ID>
 
-Example: use tiktok::search -u tiktok"""
+Example: use tiktok::search --id 423544947686244362"""
+    return text
     

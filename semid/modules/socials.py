@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup as bs
 import requests, json, argparse
 from semid.util.console import Console
-
+from semid.util.search import Google
 
 
 def search(what):
@@ -12,6 +12,7 @@ def search(what):
     try:
         username = args.username
     except:
+        print("a")
         raise TypeError()
     res = requests.get("https://linktr.ee/" + username)
     if res.status_code == 200:
@@ -20,4 +21,31 @@ def search(what):
         socials = json.loads(soup.find("script", {"id": "__NEXT_DATA__"}).contents[0])["props"]["pageProps"]["account"]["socialLinks"]
         for s in socials:
             print(Console.color("Found: " + s["url"]))
+    socials = json.loads(open("C:\SEMID\semid/socials.json", "r").read())
+    for social in socials:
+        res = requests.get(social["url"].replace("{name}", username))
+        open("res.html", "w", encoding="utf-8").write(res.text)
+        if social["type"] == "status" and res.status_code != social["status"]:
+            print(Console.color("Found: " +social["url"].replace("{name}", username)))
+        elif social["type"] == "error":
+            msg = social["msg"]
+            if msg not in res.text:
+                open("res.html", "w", encoding="utf-8").write(res.text)
+                print(Console.color("Found: " + social["url"].replace("{name}", username)))
+    for url, title in Google.search(f'site:youtube.com "{username}"', 0):
+        if "/channel/" in url and username.lower() in title.lower():
+            print(Console.color("Found: " + url))
+        elif "/channel/" in url:
+            print(Console.green(f"Possible Connection: {url} - {title}"))
+    for url, title in Google.search(f'site:twitter.com "{username}"', 0):
+        if url.endswith(username.lower()):
+            print(Console.color("Found: " + url))
+
+
+def searchsyntax():
+    text = """
+--username | -u <username>
+
+Example: use socials::search -u Xhemyd"""
+    return text
     

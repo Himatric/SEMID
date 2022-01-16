@@ -12,7 +12,7 @@ def search(args:str):
         except:
             raise TypeError
     username = argsArr[uind + 1]
-    search = Google.search(f'site:doxbin.com "{username}"')
+    search = Google.search(f'site:doxbin.com "{username}"', 0)
     if len(search) < 1:
         print("No search results")
     for url, title in search:
