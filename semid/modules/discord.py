@@ -1,3 +1,4 @@
+from threading import Thread
 from fake_headers import Headers
 from semid.util.console import Console
 import semid
@@ -113,13 +114,84 @@ def tokenonlinersyntax():
 Example: use discord::tokenonliner -f tokens.txt -m 100"""
     return text
 def scrapechannel(args:str):
-    argsArr = args.split(" ")
-
+    parser = argparse.ArgumentParser("SEMID")
+    parser.add_argument("--channelid", "-c", required=False)
+    parser.add_argument("--limit", "-l", required=False)
+    parser.add_argument("--file", "-f", required=False, default="messages.txt")
+    parser.add_argument("--token", "-t", required=False)
+    parser.add_argument("--thread", "-T", required=False, action="store_true", default=False)
+    args = args.split()
+    args = parser.parse_args(args)
+    print(args)
     try:
-        idIn = argsArr.index("--channelid")
+        id = args.channelid
+        limit = int(args.limit)
+    except: 
+        raise TypeError
+    if limit > 50:
+        limit = 50
+    try:
+        token = args.token
     except:
-        try:
-            idIn = argsArr.index("-id")
-        except:
-            raise TypeError
-    channelID = argsArr[idIn + 1]
+        token = semid.__app__.config["Token"]
+    if token == "" or token is None:
+        return print("Please update your token in config.json!")
+    TokenUtil.validateToken(token)
+    if limit < 0:
+        file = args.file
+        messages = []
+        def write_messages(messages):
+            print(Console.green("Done fetching messages"))
+            with open(file, "w", encoding="utf-8") as f:
+                for message in messages:
+                    f.write(message)
+
+        def fetch(channel, token, before):
+            url = f"https://discord.com/api/channels/{channel}/messages?limit=50"
+            if before != 0:
+                url += f"&before={before}"
+            res = requests.get(url, headers={"authorization": token})
+            msgs = json.loads(res.text)
+            if len(msgs) != 50:
+                for message in msgs:
+                    content = ''
+                    if message["content"] == content and len(message["attachments"]) > 0:
+                        content = message["attachments"][0]["url"]
+                    messages.append('|| ' + message["author"]["username"] + '#' + message["author"]["discriminator"] + ' | ' + message["content"].replace("\n", " ") + content + '\n')
+                write_messages(messages)
+            else:
+                for message in msgs:
+                    content = ""
+                    if message["content"] == content and len(message["attachments"]) > 0:
+                        content = message["attachments"][0]["url"]
+                    messages.append('|| '+ message["author"]["username"] + '#' + message["author"]["discriminator"] + ' | ' + message["content"].replace("\n", " ") + content + '\n')
+                fetch(channel, token, msgs[49]["id"])
+        if args.thread == True:
+            Thread(target=fetch, args=(id, token, 0)).start()
+        else:
+            fetch(id, token, 0)
+
+    else:
+        res = requests.get(f"https://discord.com/api/channels/{id}/messages?limit={limit}", headers=token)
+        if res.status == 200:
+            messages = json.loads(res.text)
+            for message in messages:
+                attachmenturl = ""
+                if len(message["attachments"]) > 0:
+                    attachmenturl = message["attachments"][0]["url"]                   
+                print(message["author"]["username"] + '#' + message["author"]["discriminator"] + ': ' + message["content"].replace("\n", " ") + attachmenturl)
+            else:
+                return print(Console.red("Invalid Token!"))
+
+    
+def scrapechannelsyntac():
+    text = """
+--channelid | -c <channelid>
+--token     | -t <token> (if not included, will use token in config.json)
+--file      | -f <filepath> for output (not required)
+--limit     | -l <limit> (1-50) or -1 for all messages
+--thread    | -T run the function in another thread (so you can still do other things in the meantime)
+
+
+"""
+    return text
