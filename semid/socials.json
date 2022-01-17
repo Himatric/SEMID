@@ -35,5 +35,12 @@
         "name": "fortnitetracker",
         "type": "status",
         "status": 404
+    },
+    {
+        "url": "https://www.reddit.com/user/{name}",
+        "name": "reddit",
+        "type": "message",
+        "status": 200,
+        "msg": "Sorry, nobody on Reddit goes by that name."
     }
 ]

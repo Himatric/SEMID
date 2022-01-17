@@ -23,7 +23,7 @@ class Google:
 
         res = req(what)
         if res.status_code == 403:
-            req("kitten meme")
+            req("nice cat")
             return Google.search(what, i)
 
         soup = bs4.BeautifulSoup(res.text, "html.parser")
