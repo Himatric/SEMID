@@ -49,6 +49,9 @@ class Modules:
 
         twitter         search                      Scrapes twitter forgot password page and
                                                     returns twitter account + email/phone if found
+                                
+        github          search                      Sends a requests to the github api with given
+                                                    username, and returns all info about the account.
         """
         print(Console.color(text))
 

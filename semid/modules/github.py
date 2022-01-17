@@ -35,5 +35,7 @@ def search(args:str):
     print(text)
 
 def searchsyntax():
-    text = """a"""
+    text = """
+--username | -u <username>
+--weleak   | -w Searches found email on weleakinfo (requirees api key in config.json)"""
     return text
