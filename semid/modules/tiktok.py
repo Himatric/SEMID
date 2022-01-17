@@ -45,10 +45,10 @@ def search(args:str):
     for z in alldata["UserModule"]["stats"]:
         stats = alldata["UserModule"]["stats"][z]
         nickname = alldata["UserModule"]["users"][z]["nickname"]
-        bio = alldata["UserModule"]["users"][z]["signature"]
-        if alldata["UserModule"]["users"][z]["bioLink"]:
+        bio = alldata["UserModule"]["users"][z]["signature"] if alldata["UserModule"]["users"][z]["signature"] != "" else "None"
+        try:
             link = alldata["UserModule"]["users"][z]["bioLink"]["link"]
-        else:
+        except:
              link = "None"
     c = Console.red("|")
     text = f"""{c} Username: {username} , Nickname: {nickname}
