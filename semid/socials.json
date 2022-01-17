@@ -31,12 +31,6 @@
         "msg": "SummonerNotFoundLayout"
     },
     {
-        "url": "https://fortnitetracker.com/profile/all/{name}",
-        "name": "fortnitetracker",
-        "type": "status",
-        "status": 404
-    },
-    {
         "url": "https://www.reddit.com/user/{name}",
         "name": "reddit",
         "type": "message",
