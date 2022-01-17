@@ -36,5 +36,23 @@
         "type": "message",
         "status": 200,
         "msg": "Sorry, nobody on Reddit goes by that name."
+    },
+    {
+        "url": "https://osu.ppy.sh/users/{name}",
+        "name": "osu",
+        "type": "status",
+        "status": 404
+    },
+    {
+        "url": "https://vsco.co/{name}/gallery",
+        "name": "vsco",
+        "type":"status",
+        "status": 404
+    },
+    {
+        "url": "https://www.instagram.com/{name}/",
+        "name": "instagram",
+        "type": "status",
+        "status": 404
     }
 ]

@@ -3,7 +3,7 @@ from semid.util.console import Console
 from semid.util.modules import Modules
 class Semid:
     def __init__(self) -> None:
-        self.response = Console.green("$  ")
+        self.response = Console.green("\n$  ")
         self.version = 1.0
         if os.name == "nt":
             os.system("cls")
