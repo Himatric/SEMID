@@ -54,5 +54,11 @@
         "name": "instagram",
         "type": "status",
         "status": 404
+    },
+    {
+        "url": "https://www.snapchat.com/add/{name}",
+        "name": "snapchat",
+        "type": "status",
+        "status": 404
     }
 ]
