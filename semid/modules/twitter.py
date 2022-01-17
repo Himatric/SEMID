@@ -10,7 +10,7 @@ import requests, json, argparse, cfscrape
 unfortunately completely skidded because I had no idea how to add this
 original authors: Hellsec, cs https://github.com/IRIS-team/IRIS
 """
-def search(args):
+def search(args:str):
     parser = argparse.ArgumentParser("SEMID")
     parser.add_argument("--username", "-u", required=False)
     args = args.split()
@@ -47,7 +47,7 @@ def search(args):
             if "Not found" == err:
                 print(f'{Fore.RED}•{Fore.RESET} Username Not Found On Twitter')
             else:
-                print(err)
+                pass
         except:
             print(f'{Fore.RED}•{Fore.RESET} Username Not Found On Twitter')
             
@@ -88,7 +88,7 @@ def search(args):
             ):
                 print( f'{Fore.YELLOW}•{Fore.RESET} Rate Limit' )
         except:
-            print("Error")
+            pass
         try:
             info = soup2.find('ul', attrs={'class': 'Form-radioList'}).findAll('strong')
         except:
