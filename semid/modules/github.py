@@ -17,12 +17,10 @@ def search(args:str):
     id = jso["id"]
     location = jso["location"] if jso["location"] else "None"
     email = jso["email"] if jso["email"] else "None"
-    bio = jso["bio"]
+    bio = jso["bio"] if jso["bio"] else "None"
     twitter = jso["twitter_username"] if jso["twitter_username"] else "None"
     name = jso["name"]
     a = Console.red("|")
-    if email != "None" and args.weleak == True and semid.__app__.config["WeLeak"] != "":
-        weleak = WeLeak.search(email)
     text = f"""
 {a} Username: {username}
 {a} Name:     {name}
@@ -31,7 +29,9 @@ def search(args:str):
 {a} Twitter:  {twitter}
 {a} Location: {location}
 """
-    text += weleak
+    if email != "None" and args.weleak == True and semid.__app__.config["WeLeak"] != "":
+        weleak = WeLeak.search(email)
+        text += weleak
     print(text)
 
 def searchsyntax():
