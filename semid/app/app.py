@@ -1,10 +1,12 @@
 import os, sys, json
+from requests import get
+
 from semid.util.console import Console
 from semid.util.modules import Modules
 class Semid:
     def __init__(self) -> None:
         self.response = Console.green("\n$  ")
-        self.version = 1.0
+        self.version = "BETA"
         if os.name == "nt":
             os.system("cls")
         else: 
@@ -12,8 +14,8 @@ class Semid:
         self.show_banner()
         Console.set_title("""SEMID Framework | Made by Hima""")
         self.config = json.loads(open("config.json").read())
+        self.checkversion()
     def start(self):
-        
         sys.stdout.write(self.response)
         sys.stdout.flush()
         what = input()
@@ -75,6 +77,10 @@ Try typing help to see what you can do.
 
 """
         sys.stdout.write(Console.color(Console.center(banner)))
+    def checkversion(self):
+        res = json.loads(get("https://raw.githubusercontent.com/Himatric/SEMID/master/config.json").text)
+        if res["version"] != self.version:
+            print("\n" + Console.red("You are not using the latest version of SEMID."))
     def show_help(self):
         text = """
                                     SEMID HELP MENU
