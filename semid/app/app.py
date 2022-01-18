@@ -88,11 +88,11 @@ Try typing help to see what you can do.
 
     use                     Module::Function    Function Arguments  Use a built in module.
 
-    modules                 /                   /                   Lists all availabe modules.
+    modules                                                         Lists all availabe modules.
 
-    cls                     /                   /                   Clears the console.
+    cls                                                             Clears the console.
 
-    help                    /                   /                   Shows this menu.
+    help                                                            Shows this menu.
 
 
 """
