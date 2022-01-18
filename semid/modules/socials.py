@@ -12,7 +12,7 @@ def search(what):
     what = what.split()
     args = parser.parse_args(what)
     try:
-        username = args.username
+        username:str = args.username
     except:
         print("a")
         raise TypeError()
@@ -23,7 +23,7 @@ def search(what):
         socials = json.loads(soup.find("script", {"id": "__NEXT_DATA__"}).contents[0])["props"]["pageProps"]["account"]["socialLinks"]
         for s in socials:
             print(Console.color("Found: " + s["url"]))
-    socials = json.loads(open("./semid/socials.json", "r").read())
+    socials:list = json.loads(open("./semid/socials.json", "r").read())
     for social in socials:
         headers = Headers("chrome").generate()
         res = requests.get(social["url"].replace("{name}", username), headers=headers)
@@ -42,10 +42,10 @@ def search(what):
         if url.endswith(username.lower()):
             print(Console.color("Found: " + url))
     for url, title in Google.search(f'site:namemc.com "{username}"', 0):
-        print(url, title)
+        if username.lower() in url and "/profile/" in url:
+            print(Console.color("Found: " + url))
     if args.weleak == True and semid.__app__.config["WeLeakInfo"] != "" and len(username) > 4:
         print(Console.color(WeLeak.search(username)))
-
 
 def searchsyntax():
     text = """

@@ -60,5 +60,47 @@
         "name": "snapchat",
         "type": "status",
         "status": 404
+    },
+    {
+        "url": "https://twoucan.com/profile/{name}",
+        "name": "twoucan",
+        "type":"status",
+        "status": 404
+    },
+    {
+        "url": "https://steamcommunity.com/id/{name}/",
+        "name": "steam",
+        "type":"message",
+        "msg": "The specified profile could not be found."
+    },
+    {
+        "url": "https://www.influenster.com/{name}/",
+        "name": "influenster",
+        "type":"status",
+        "status": 404
+    },
+    {
+        "url": "https://vimeo.com/{name}",
+        "name": "vime",
+        "type": "status",
+        "status": 404
+    },
+    {
+        "url": "https://ello.co/{name}",
+        "name": "ello",
+        "type": "status",
+        "status":404
+    },
+    {
+        "url": "https://soundcloud.com/{name}",
+        "name": "soundcloud",
+        "type": "status",
+        "status":404
+    },
+    {
+        "url": "https://www.pinterest.com/{name}/",
+        "name": "pinterest",
+        "type": "status",
+        "status": 404
     }
 ]
