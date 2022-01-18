@@ -3,3 +3,4 @@ requests
 beautifulsoup4
 fake_headers
 websocket-client
+cfscrape
