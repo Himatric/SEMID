@@ -26,11 +26,11 @@ $ help
 
     use                     Module::Function    Function Arguments  Use a built in function
 
-    modules                 /                   /                   Lists all availabe modules
+    modules                                                         Lists all availabe modules
     
-    cls                     /                   /                   Clears the console.
+    cls                                                             Clears the console.
 
-    help                    /                   /                   Shows this menu.
+    help                                                            Shows this menu.
 
 $  use github::search -u Himatric
 
