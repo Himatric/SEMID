@@ -193,7 +193,7 @@ def scrapechannelsyntax():
 --thread    | -T run the function in another thread (so you can still do other things in the meantime)
 
 
-"""
+Example: discord::scrapechannel -c 934255362537275 -l -1 --thread"""
     return text
 
 
