@@ -1,15 +1,10 @@
 from fake_headers import Headers
 from urllib3.util.ssl_ import create_urllib3_context
 from bs4 import BeautifulSoup as bs
-from colorama import Fore
 from requests.adapters import HTTPAdapter
 from semid.util.console import Console
 import requests, json, argparse, cfscrape
 
-"""
-unfortunately completely skidded because I had no idea how to add this
-original authors: Hellsec, cs https://github.com/IRIS-team/IRIS
-"""
 def search(args:str):
     parser = argparse.ArgumentParser("SEMID")
     parser.add_argument("--username", "-u", required=False)
@@ -18,10 +13,8 @@ def search(args:str):
         arg = parser.parse_args(args)
     except:
         raise TypeError
-    target = arg.username
-    if '@' in target:
-        target = target.split('@')[0]
-    url = "https://api.twitter.com/graphql/P8ph10GzBbdMqWZxulqCfA/UserByScreenName?variables=%7B%22screen_name%22%3A%22" + target + "%22%2C%22withHighlightedLabel%22%3Atrue%7D"
+    username = arg.username
+    url = "https://api.twitter.com/graphql/P8ph10GzBbdMqWZxulqCfA/UserByScreenName?variables={\"screen_name\":\"" + username + "\",\"withHighlightedLabel\":true}"
     headers = {
         "accept": "*/*",
         "accept-encoding": "gzip, deflate, br",
@@ -37,25 +30,25 @@ def search(args:str):
         'x-twitter-active-user': 'yes',
         'x-twitter-client-language': 'en'
         }
-    resp  = json.loads(requests.get(url, headers=headers).text)
+    res  = requests.get(url, headers=headers)
+    resp = json.loads(res.text)
     try:
         if resp["data"]["user"]["id"] in resp:
             pass
     except:
         try:
             err = resp["errors"][0]["message"]
-            if "Not found" == err:
-                print(f'{Fore.RED}•{Fore.RESET} Username Not Found On Twitter')
+            if err == "Not found":
+                return print(Console.red("User not found"))
             else:
                 pass
         except:
-            print(f'{Fore.RED}•{Fore.RESET} Username Not Found On Twitter')
+            return print(Console.red("User not found"))
             
     bio = resp["data"]["user"]["legacy"]["description"]
     followers = resp["data"]["user"]["legacy"]["followers_count"]
     location = resp["data"]["user"]["legacy"]["location"]
     name = resp["data"]["user"]["legacy"]["name"]
-    Id = resp["data"]["user"]["id"]
     created = resp["data"]["user"]["legacy"]["created_at"]
     if location == '':
         location = 'Unknown'
@@ -76,7 +69,7 @@ def search(args:str):
         req = scraper.get(url, headers=header.generate())
         soup = bs(req.text, 'html.parser')
         authenticity_token = soup.input.get('value')
-        data = {'authenticity_token': authenticity_token, 'account_identifier': target}
+        data = {'authenticity_token': authenticity_token, 'account_identifier': username}
         cookies = req.cookies
         response = scraper.post(url, cookies=cookies, data=data, headers=header.generate())
         soup2 = bs(response.text, 'html.parser')
@@ -86,25 +79,25 @@ def search(args:str):
                 soup2.find('div', attrs={'class': 'is-errored'}).text
                 == 'Please try again later.'
             ):
-                print( f'{Fore.YELLOW}•{Fore.RESET} Rate Limit' )
+                print(Console.red("Rate limited."))
         except:
             pass
         try:
             info = soup2.find('ul', attrs={'class': 'Form-radioList'}).findAll('strong')
         except:
-            print( 'No email or phone')
+            print('No email or phone')
         try:
             phone = int(info[0].text)
             email = str(info[1].text)
         except:
             email = str(info[0].text)
             phone = 'None'
-    except Exception as e:
+    except:
         email = 'Rate Limit'
         phone = 'Rate Limit'
     c = Console.red("|")
     text = f"""
-{c} Username: {target}
+{c} Username: {username}
 {c} Full name: {name}
 {c} Followers: {followers}
 {c} Location: {location}
