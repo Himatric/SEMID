@@ -19,7 +19,7 @@ pip install -r requirements.txt
 ```
 python -m semid
 
-=> help
+$ help
 
                                       SEMID HELP MENU
     CommandName             Args                Kwargs              Description
@@ -31,6 +31,15 @@ python -m semid
     cls                     /                   /                   Clears the console.
 
     help                    /                   /                   Shows this menu.
+
+$  use github::search -u Himatric
+
+| Username: Himatric
+| Name:     Hima
+| Bio:      i code or something
+| Email:    None
+| Twitter:  None
+| Location: None
 
 ```
 
