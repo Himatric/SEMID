@@ -70,6 +70,9 @@ python -m semid
         discord         scrapechannel               Scrapes messages from a discord channel
                                                     and outputs them in a file/console
 
+        discord         disabletoken                Disables the given token by sending invalid
+                                                    requests to the discord api.
+
         doxbin          search                      Searches provided username on doxbin and
                                                     returns the urls if found.
                                                     

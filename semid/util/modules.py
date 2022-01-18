@@ -44,6 +44,9 @@ class Modules:
                                                     online by connecting them directly to
                                                     Discord's websocket.
 
+        discord         disabletoken                Disables the given token by sending invalid
+                                                    requests to the discord api.
+
         doxbin          search                      Searches provided username on doxbin and
                                                     returns the urls if found.
 

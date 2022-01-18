@@ -184,7 +184,7 @@ def scrapechannel(args:str):
                 return print(Console.red("Invalid Token!"))
 
     
-def scrapechannelsyntac():
+def scrapechannelsyntax():
     text = """
 --channelid | -c <channelid>
 --token     | -t <token> (if not included, will use token in config.json)
@@ -194,4 +194,26 @@ def scrapechannelsyntac():
 
 
 """
+    return text
+
+
+def disabletoken(args:str):
+    parser = argparse.ArgumentParser("SEMID")
+    parser.add_argument("--token", "-t", required=False)
+    args = args.split()
+    args = parser.parse_args(args)
+    try:
+        token = args.token
+    except:
+        raise TypeError
+    a = input("Are you sure you want to disable this token? [y/n]: ")
+    if a.lower() == "y" or a.lower() == "yes":
+        TokenUtil.disableToken(token)
+    else: 
+        return
+def disabletokensyntax():
+    text = """
+--token | -t <token>
+
+Example: use discord::disabletoken NDIzNTQ0OTQ3Njg2MjQ0MzYy.Yegw_g.MpI6o6LXqKS1qqeqcKvfJUo7Gqd"""
     return text

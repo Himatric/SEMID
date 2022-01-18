@@ -27,7 +27,6 @@ def search(what):
     for social in socials:
         headers = Headers("chrome").generate()
         res = requests.get(social["url"].replace("{name}", username), headers=headers)
-        open("res.html", "w", encoding="utf-8").write(res.text)
         if social["type"] == "status" and res.status_code != social["status"]:
             print(Console.color("Found: " +social["url"].replace("{name}", username)))
         elif social["type"] == "message":
@@ -42,6 +41,8 @@ def search(what):
     for url, title in Google.search(f'site:twitter.com "{username}"', 0):
         if url.endswith(username.lower()):
             print(Console.color("Found: " + url))
+    for url, title in Google.search(f'site:namemc.com "{username}"', 0):
+        print(url, title)
     if args.weleak == True and semid.__app__.config["WeLeakInfo"] != "" and len(username) > 4:
         print(Console.color(WeLeak.search(username)))
 
