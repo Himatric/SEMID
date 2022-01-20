@@ -58,10 +58,6 @@ $  use github::search -u Himatric
         socials         search                      Searches for a users social media by the
                                                     username provided. Currently only looks
                                                     for linktree, but will be updated shortly
-        
-        semid           search                      Sends a request to our api, which includes an
-                                                    ip address if found. Currently only working
-                                                    with discord ID
 
         playstation     searchusername              Sends a request to PS Resolver's api
                                                     which returns an IP Address if found

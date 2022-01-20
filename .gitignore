@@ -8,3 +8,6 @@ package.json
 package-lock.json
 node_modules/
 messages.txt
+curl/
+a.exe
+tool.c
